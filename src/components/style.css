@@ -1,0 +1,40 @@
+.data {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  margin-bottom: 50px;
+}
+
+.table-header {
+  background: #2d2d2d;
+}
+
+.table-header th {
+  border: 1px solid #ddd;
+  padding: 12px 16px;
+  font-weight: normal;
+}
+
+.header-title {
+  color: #ffffff;
+  text-align: left;
+}
+
+.header-substrats {
+  color: #6b7280;
+  text-align: center;
+}
+
+.header-actions {
+  text-align: right;
+}
+
+.action-link {
+  color: #3b82f6;
+  cursor: pointer;
+  margin-right: 12px;
+}
+
+.action-link:last-child {
+  margin-right: 0;
+}
