@@ -1,109 +1,78 @@
-import { NodeData, TreeNode } from "../@types/data";
-import { useFetchData } from "../hooks/useFetchData";
-import "./style.css";
+import data from "../server/data.json";
+import { TableData } from "../@types/data";
+import { generateTableRows } from "../utils/utils";
 
-const DataTable = () => {
-  const { items: data } = useFetchData();
-
-  if (!data || data.length === 0) {
-    return <div>No data available.</div>;
-  }
-
-  const sectionHeader = (children: (TreeNode | NodeData)[] | null) => {
-    return (
-      <>
-        <tbody>
-          {children?.map((child, idx) => (
-            <tr key={idx}>
-              <th>test</th>
-              <th>
-                <div>test</div>
-              </th>
-              <th>
-                <div></div>
-              </th>
-              <th>
-                <div>Real. Amount</div>
-              </th>
-              <th>
-                <div>Payment Delay</div>
-              </th>
-              <th>
-                <div>Asset Amount</div>
-              </th>
-            </tr>
-          ))}
-        </tbody>
-      </>
-    );
-  };
+export default function PortfolioTable() {
+  const tableData = data as TableData[];
+  const portfolios = tableData[0].children;
 
   return (
-    <>
-      {data.map((header, index) => (
-        <table
-          style={{ borderCollapse: "collapse", width: "100%" }}
-          className="table"
-          key={index}
-        >
-          <thead className="table-header">
-            <tr>
-              <th className="header-title">{header.primary}</th>
-
-              <th className="header-actions">
-                <span className="action-link">Collapse All</span>
-                <span className="action-link">Expand All</span>
-              </th>
-            </tr>
-          </thead>
-          <thead>
-            <tr>
-              <th>{header.primary}</th>
-              <th>
-                <div className="flex items-center justify-end">Loan #</div>
-              </th>
-              <th>
-                <div>Remaining Amount</div>
-              </th>
-              <th>
-                <div>Real. Amount</div>
-              </th>
-              <th>
-                <div>Payment Delay</div>
-              </th>
-              <th>
-                <div>Asset Amount</div>
-              </th>
-            </tr>
-          </thead>
-
-          <thead className="table-header">
-            {sectionHeader(header.children)}
-          </thead>
-
-          {/* <tbody>
-            {header.children.map((child, idx) => (
-              <tr key={idx} className="table-row">
-                <td className="row-label">{child?.root?.label}</td>
-                <td className="row-data">
-                  <span>Loan Number: {child?.root?.loan_number}</span>
-                  <span>Remaining Amount: {child?.root?.remaining_amount}</span>
-                  <span>Realized Amount: {child?.root?.realized_amount}</span>
-                  <span>Payment Delay: {child?.root?.payment_delay}</span>
-                  <span>
-                    Asset Amount:{" "}
-                    {child?.root?.asset_amount !== null
-                      ? child?.root?.asset_amount
-                      : "N/A"}
-                  </span>
-                </td>
-              </tr>
-            ))}
-          </tbody> */}
-        </table>
-      ))}
-    </>
+    <table
+      style={{
+        width: "100%",
+        borderCollapse: "collapse",
+        border: "1px solid #ccc",
+      }}
+    >
+      <thead>
+        <tr style={{ backgroundColor: "#f4f4f4" }}>
+          <th
+            style={{
+              textAlign: "left",
+              padding: "8px",
+              border: "1px solid #ddd",
+            }}
+          >
+            Name
+          </th>
+          <th
+            style={{
+              textAlign: "right",
+              padding: "8px",
+              border: "1px solid #ddd",
+            }}
+          >
+            Loan #
+          </th>
+          <th
+            style={{
+              textAlign: "right",
+              padding: "8px",
+              border: "1px solid #ddd",
+            }}
+          >
+            Remaining Amount
+          </th>
+          <th
+            style={{
+              textAlign: "right",
+              padding: "8px",
+              border: "1px solid #ddd",
+            }}
+          >
+            Realized Amount
+          </th>
+          <th
+            style={{
+              textAlign: "right",
+              padding: "8px",
+              border: "1px solid #ddd",
+            }}
+          >
+            Payment Delay
+          </th>
+          <th
+            style={{
+              textAlign: "right",
+              padding: "8px",
+              border: "1px solid #ddd",
+            }}
+          >
+            Asset Amount
+          </th>
+        </tr>
+      </thead>
+      <tbody>{generateTableRows(portfolios)}</tbody>
+    </table>
   );
-};
-
-export default DataTable;
+}
