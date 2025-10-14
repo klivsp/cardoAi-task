@@ -3,3 +3,8 @@
   font-weight: bold;
   margin-bottom: 20px;
 }
+
+.second-table-header {
+  display: flex;
+  justify-content: space-between;
+}

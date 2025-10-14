@@ -1,5 +1,6 @@
 import { NodeData, TreeNode } from "../@types/data";
 import { JSX } from "react/jsx-runtime";
+import "../index.css";
 
 export function generateTableRows(
   nodes: (TreeNode | NodeData)[],
@@ -25,7 +26,7 @@ export function generateTableRows(
     const nodeKey = path ? `${path}-${index}` : `${index}`;
 
     const row = (
-      <tr key={nodeKey}>
+      <tr key={nodeKey} className="table-rows-style">
         <td
           style={{
             paddingLeft: `${level * 20}px`,

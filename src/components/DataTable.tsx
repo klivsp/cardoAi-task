@@ -2,6 +2,7 @@ import { useState } from "react";
 import data from "../server/data.json";
 import { NodeData, TableData, TreeNode } from "../@types/data";
 import { generateTableRows } from "../utils/utils";
+import "../App.css";
 
 export default function PortfolioTable() {
   const tableData = data as TableData[];
@@ -39,7 +40,6 @@ export default function PortfolioTable() {
 
   return (
     <div style={{ width: "100%", border: "1px solid #ccc", borderRadius: 6 }}>
-      {/* Header with buttons */}
       <div
         style={{
           display: "flex",
@@ -80,8 +80,6 @@ export default function PortfolioTable() {
           </button>
         </div>
       </div>
-
-      {/* Table */}
       <table
         style={{
           width: "100%",
@@ -89,13 +87,13 @@ export default function PortfolioTable() {
         }}
       >
         <thead>
-          <tr style={{ backgroundColor: "#f4f4f4" }}>
-            <th style={thStyle}>Name</th>
-            <th style={thStyleRight}>Loan #</th>
-            <th style={thStyleRight}>Remaining Amount</th>
-            <th style={thStyleRight}>Realized Amount</th>
-            <th style={thStyleRight}>Payment Delay</th>
-            <th style={thStyleRight}>Asset Amount</th>
+          <tr className="table-rows-style">
+            <th>Name</th>
+            <th>Loan #</th>
+            <th>Remaining Amount</th>
+            <th>Realized Amount</th>
+            <th>Payment Delay</th>
+            <th>Asset Amount</th>
           </tr>
         </thead>
         <tbody>
@@ -105,15 +103,3 @@ export default function PortfolioTable() {
     </div>
   );
 }
-
-const thStyle = {
-  textAlign: "left" as const,
-  padding: "8px",
-  border: "1px solid #ddd",
-};
-
-const thStyleRight = {
-  textAlign: "right" as const,
-  padding: "8px",
-  border: "1px solid #ddd",
-};
