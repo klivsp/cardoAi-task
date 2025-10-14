@@ -5,7 +5,6 @@ import { useFetchData } from "./hooks/useFetchData";
 function App() {
   const { items } = useFetchData();
 
-  console.log(items, "itemsss");
   return (
     <>
       <h1 className="app-title">Cardo AI task</h1>

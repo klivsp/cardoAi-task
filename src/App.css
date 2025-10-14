@@ -14,3 +14,27 @@
   flex-direction: column;
   gap: 48px;
 }
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  background-color: #f0f2f5;
+  border-bottom: 1px solid #ddd;
+}
+
+.table-header-title {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+}
+
+.action-button {
+  color: #3b82f6;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
