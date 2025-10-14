@@ -9,26 +9,23 @@ interface DatagridProps {
 
 export default function Datagrid({ tableData }: DatagridProps) {
   const [expandTable, setExpandTable] = useState(false);
-  const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set());
+  const [expandedNodes, setExpandedNodes] = useState<Record<string, boolean>>(
+    {}
+  );
 
   const handleToggle = (label: string) => {
-    setExpandedNodes((prev) => {
-      const next = new Set(prev);
-      if (next.has(label)) {
-        next.delete(label);
-      } else {
-        next.add(label);
-      }
-      return next;
-    });
+    setExpandedNodes((prev) => ({
+      ...prev,
+      [label]: !prev[label],
+    }));
   };
 
   const expandAll = () => {
-    const allLabels = new Set<string>();
+    const allLabels: Record<string, boolean> = {};
     const collect = (nodes: (TreeNode | NodeData)[]) => {
       for (const n of nodes) {
         if ("root" in n && n.root) {
-          allLabels.add(n.root.label);
+          allLabels[n.root.label] = true;
           if (n.children) collect(n.children);
         }
       }
@@ -39,7 +36,7 @@ export default function Datagrid({ tableData }: DatagridProps) {
   };
 
   const collapseAll = () => {
-    setExpandedNodes(new Set());
+    setExpandedNodes({});
     setExpandTable(false);
   };
 

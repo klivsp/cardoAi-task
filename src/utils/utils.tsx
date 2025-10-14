@@ -5,7 +5,7 @@ import "../index.css";
 export function generateTableRows(
   nodes: (TreeNode | NodeData)[],
   level = 0,
-  expandedNodes: Set<string>,
+  expandedNodes: Record<string, boolean>,
   onToggle: (label: string) => void,
   path = ""
 ): JSX.Element[] {
@@ -21,7 +21,7 @@ export function generateTableRows(
     }
 
     const hasChildren = Array.isArray(children) && children.length > 0;
-    const isExpanded = expandedNodes.has(data.label);
+    const isExpanded = expandedNodes[data.label];
 
     const nodeKey = path ? `${path}-${index}` : `${index}`;
 
