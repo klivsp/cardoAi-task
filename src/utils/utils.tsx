@@ -5,7 +5,8 @@ export function generateTableRows(
   nodes: (TreeNode | NodeData)[],
   level = 0,
   expandedNodes: Set<string>,
-  onToggle: (label: string) => void
+  onToggle: (label: string) => void,
+  path = ""
 ): JSX.Element[] {
   return nodes.flatMap((node, index) => {
     let data: NodeData;
@@ -21,8 +22,10 @@ export function generateTableRows(
     const hasChildren = Array.isArray(children) && children.length > 0;
     const isExpanded = expandedNodes.has(data.label);
 
+    const nodeKey = path ? `${path}-${index}` : `${index}`;
+
     const row = (
-      <tr key={`${data.label}-${index}`}>
+      <tr key={nodeKey}>
         <td
           style={{
             paddingLeft: `${level * 20}px`,
@@ -53,7 +56,13 @@ export function generateTableRows(
 
     const childRows =
       hasChildren && isExpanded && children
-        ? generateTableRows(children, level + 1, expandedNodes, onToggle)
+        ? generateTableRows(
+            children,
+            level + 1,
+            expandedNodes,
+            onToggle,
+            nodeKey
+          )
         : [];
 
     return [row, ...childRows];
