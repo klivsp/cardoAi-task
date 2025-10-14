@@ -13,3 +13,8 @@ th {
   text-align: start;
   font-size: 14px;
 }
+
+.table-header-with-filter {
+  cursor: pointer;
+  user-select: none;
+}
