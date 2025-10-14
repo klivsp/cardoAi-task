@@ -20,19 +20,25 @@ export default function Datagrid({ tableData }: DatagridProps) {
     }));
   };
 
-  const expandAll = () => {
-    const allLabels: Record<string, boolean> = {};
-    const collect = (nodes: (TreeNode | NodeData)[]) => {
-      for (const n of nodes) {
-        if ("root" in n && n.root) {
-          allLabels[n.root.label] = true;
-          if (n.children) collect(n.children);
+  const getNodesThatHaveChildrens = (
+    nodes: (TreeNode | NodeData)[],
+    labels: Record<string, boolean> = {}
+  ): Record<string, boolean> => {
+    for (const node of nodes) {
+      if ("root" in node && node.root) {
+        labels[node.root.label] = true;
+        if (node.children) {
+          getNodesThatHaveChildrens(node.children, labels);
         }
       }
-    };
-    collect(tableData.children);
+    }
+    return labels;
+  };
+
+  const expandAll = () => {
+    const allExpandableNodes = getNodesThatHaveChildrens(tableData.children);
     setExpandTable(true);
-    setExpandedNodes(allLabels);
+    setExpandedNodes(allExpandableNodes);
   };
 
   const collapseAll = () => {
@@ -41,7 +47,7 @@ export default function Datagrid({ tableData }: DatagridProps) {
   };
 
   return (
-    <div style={{ width: "100%", border: "1px solid #ccc", borderRadius: 6 }}>
+    <div style={{ width: "100%", border: "1px solid #ccc" }}>
       <div className="table-header ">
         <div className="table-header-title">
           <span

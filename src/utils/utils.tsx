@@ -31,14 +31,18 @@ export function generateTableRows(
           style={{
             paddingLeft: `${level * 20}px`,
             cursor: hasChildren ? "pointer" : "default",
+            width: "60%",
           }}
         >
           {hasChildren && (
             <span
-              style={{ marginRight: "5px", userSelect: "none" }}
+              style={{
+                marginRight: "20px",
+                transform: isExpanded ? "rotate(90deg)" : "",
+              }}
               onClick={() => onToggle(data.label)}
             >
-              {isExpanded ? "▼" : "▸"}
+              {isExpanded ? "▼" : "►"}
             </span>
           )}
           {data.label}
