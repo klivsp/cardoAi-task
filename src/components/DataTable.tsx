@@ -1,13 +1,13 @@
 import { useState } from "react";
-import data from "../server/data.json";
 import { NodeData, TableData, TreeNode } from "../@types/data";
 import { generateTableRows } from "../utils/utils";
 import "../App.css";
 
-export default function PortfolioTable() {
-  const tableData = data as TableData[];
-  const portfolios = tableData[0].children;
+interface DatagridProps {
+  tableData: TableData;
+}
 
+export default function Datagrid({ tableData }: DatagridProps) {
   const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set());
 
   const handleToggle = (label: string) => {
@@ -32,7 +32,7 @@ export default function PortfolioTable() {
         }
       }
     };
-    collect(portfolios);
+    collect(tableData.children);
     setExpandedNodes(allLabels);
   };
 
@@ -50,7 +50,7 @@ export default function PortfolioTable() {
           borderBottom: "1px solid #ddd",
         }}
       >
-        <h2 style={{ margin: 0, fontSize: "20px" }}>Portfolio Overview</h2>
+        <h2 style={{ margin: 0, fontSize: "20px" }}>{tableData.primary}</h2>
         <div style={{ display: "flex", gap: "8px" }}>
           <button
             onClick={expandAll}
@@ -89,7 +89,7 @@ export default function PortfolioTable() {
         <thead>
           <tr className="table-rows-style">
             <th>Name</th>
-            <th>Loan #</th>
+            <th>Loan</th>
             <th>Remaining Amount</th>
             <th>Realized Amount</th>
             <th>Payment Delay</th>
@@ -97,7 +97,12 @@ export default function PortfolioTable() {
           </tr>
         </thead>
         <tbody>
-          {generateTableRows(portfolios, 0, expandedNodes, handleToggle)}
+          {generateTableRows(
+            tableData.children,
+            0,
+            expandedNodes,
+            handleToggle
+          )}
         </tbody>
       </table>
     </div>

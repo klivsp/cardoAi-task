@@ -1,5 +1,5 @@
 import "./App.css";
-import DataTable from "./components/DataTable";
+import Datagrid from "./components/DataTable";
 import { useFetchData } from "./hooks/useFetchData";
 
 function App() {
@@ -9,7 +9,11 @@ function App() {
   return (
     <>
       <h1 className="app-title">Cardo AI task</h1>
-      <DataTable />
+      <div className="table-wrapper">
+        {items.map((item, index) => {
+          return <Datagrid key={index} tableData={item} />;
+        })}
+      </div>
     </>
   );
 }
