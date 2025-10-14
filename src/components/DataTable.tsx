@@ -13,7 +13,7 @@ export default function Datagrid({ tableData }: DatagridProps) {
     {}
   );
 
-  const handleToggle = (label: string) => {
+  const handleToggleExpandCollapse = (label: string) => {
     setExpandedNodes((prev) => ({
       ...prev,
       [label]: !prev[label],
@@ -91,7 +91,7 @@ export default function Datagrid({ tableData }: DatagridProps) {
               tableData.children,
               0,
               expandedNodes,
-              handleToggle
+              handleToggleExpandCollapse
             )}
           </tbody>
         </table>

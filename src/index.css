@@ -6,7 +6,9 @@ body {
   background-color: #f5f5f5;
 }
 
-.table-rows-style td {
+.table-rows-style td,
+th {
   border: 1px solid #ddd;
   padding: 8px;
+  text-align: start;
 }
