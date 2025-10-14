@@ -3,7 +3,9 @@ import { JSX } from "react/jsx-runtime";
 
 export function generateTableRows(
   nodes: (TreeNode | NodeData)[],
-  level = 0
+  level = 0,
+  expandedNodes: Set<string>,
+  onToggle: (label: string) => void
 ): JSX.Element[] {
   return nodes.flatMap((node, index) => {
     let data: NodeData;
@@ -17,11 +19,24 @@ export function generateTableRows(
     }
 
     const hasChildren = Array.isArray(children) && children.length > 0;
+    const isExpanded = expandedNodes.has(data.label);
 
     const row = (
       <tr key={`${data.label}-${index}`}>
-        <td style={{ paddingLeft: `${level * 20}px` }}>
-          {hasChildren && <span style={{ marginRight: "5px" }}>▸</span>}
+        <td
+          style={{
+            paddingLeft: `${level * 20}px`,
+            cursor: hasChildren ? "pointer" : "default",
+          }}
+        >
+          {hasChildren && (
+            <span
+              style={{ marginRight: "5px", userSelect: "none" }}
+              onClick={() => onToggle(data.label)}
+            >
+              {isExpanded ? "▼" : "▸"}
+            </span>
+          )}
           {data.label}
         </td>
         <td>{data.loan_number}</td>
@@ -37,7 +52,9 @@ export function generateTableRows(
     );
 
     const childRows =
-      hasChildren && children ? generateTableRows(children, level + 1) : [];
+      hasChildren && isExpanded && children
+        ? generateTableRows(children, level + 1, expandedNodes, onToggle)
+        : [];
 
     return [row, ...childRows];
   });
