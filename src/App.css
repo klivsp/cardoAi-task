@@ -2,6 +2,32 @@
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
+  margin-left: 10px;
+  color: #132440;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  background-color: #eeeff09b;
+  padding: 5px 10px;
+  border-radius: 50px;
+  border: 1px solid #ddd;
+}
+
+.header-button {
+  color: white;
+  background-color: #ed3f27;
+  border: none;
+  padding: 18px 34px;
+  border-radius: 50px;
+  cursor: pointer;
+  a {
+    color: white;
+    text-decoration: none;
+  }
 }
 
 .second-table-header {
@@ -12,7 +38,7 @@
 .table-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 20px;
 }
 
 .table-header {
@@ -37,4 +63,5 @@
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
+  background-color: transparent;
 }

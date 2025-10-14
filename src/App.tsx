@@ -7,7 +7,14 @@ function App() {
 
   return (
     <>
-      <h1 className="app-title">Cardo AI task</h1>
+      <div className="header">
+        <h1 className="app-title">Cardo AI task</h1>
+        <span className="header-button">
+          <a href="https://github.com/klivsp" rel="noreferrer" target="_blank">
+            Github
+          </a>
+        </span>
+      </div>
       <div className="table-wrapper">
         {items.map((item, index) => {
           return <Datagrid key={index} tableData={item} />;

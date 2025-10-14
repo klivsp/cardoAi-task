@@ -93,6 +93,7 @@ export default function Datagrid({ tableData }: DatagridProps) {
           style={{
             color: isActive && sortDirection === "desc" ? "#000" : "#ccc",
             lineHeight: "0.5",
+            padding: "2px",
           }}
         >
           ▲
